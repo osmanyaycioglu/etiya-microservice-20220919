@@ -1,0 +1,6 @@
+app:
+  help:
+    note: not1
+  version: 1.0.1
+test:
+  description: testabc
