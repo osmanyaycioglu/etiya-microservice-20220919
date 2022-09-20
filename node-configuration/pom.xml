@@ -13,6 +13,8 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>node-configuration</name>
     <description>node-configuration</description>
+    <packaging>jar</packaging>
+
     <properties>
         <java.version>11</java.version>
         <spring-cloud.version>2021.0.4</spring-cloud.version>
