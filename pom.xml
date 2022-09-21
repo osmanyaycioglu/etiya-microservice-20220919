@@ -12,6 +12,8 @@
 
   <modules>
     <module>node-configuration</module>
+    <module>node-discovery</module>
+    <module>ms-order</module>
   </modules>
 
 
