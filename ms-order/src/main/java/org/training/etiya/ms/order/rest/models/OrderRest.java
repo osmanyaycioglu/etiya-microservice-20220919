@@ -16,7 +16,7 @@ public class OrderRest {
     @Size(min = 2,max = 12)
     private String customerNumber;
     @Valid
-    private List<Meal> meals;
+    private List<MealRest> meals;
 
     public String getCustomerName() {
         return customerName;
@@ -34,11 +34,11 @@ public class OrderRest {
         this.customerNumber = customerNumber;
     }
 
-    public List<Meal> getMeals() {
+    public List<MealRest> getMeals() {
         return meals;
     }
 
-    public void setMeals(List<Meal> meals) {
+    public void setMeals(List<MealRest> meals) {
         this.meals = meals;
     }
 }

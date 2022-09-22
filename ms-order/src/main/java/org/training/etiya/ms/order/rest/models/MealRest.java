@@ -4,7 +4,7 @@ import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotEmpty;
 
-public class Meal {
+public class MealRest {
     @NotEmpty
     private String name;
     @DecimalMax("10.0")
