@@ -36,4 +36,16 @@ public class OrderService {
         // ...
         return accountingIntegration.pay2(paymentRequest);
     }
+
+    public String placeOrder3(Order order) {
+        orderDao.insertOrder(order);
+        PaymentRequest paymentRequest = new PaymentRequest();
+        paymentRequest.setCustomerId(1L);
+        paymentRequest.setAmount(100.0F);
+        paymentRequest.setOrderId(order.getOrderId());
+
+        // ...
+        return accountingIntegration.pay3(paymentRequest);
+
+    }
 }

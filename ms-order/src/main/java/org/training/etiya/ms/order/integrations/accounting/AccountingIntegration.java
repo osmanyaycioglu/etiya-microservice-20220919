@@ -3,6 +3,7 @@ package org.training.etiya.ms.order.integrations.accounting;
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
 import com.netflix.discovery.shared.Application;
+import io.github.resilience4j.retry.annotation.Retry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
@@ -21,8 +22,16 @@ public class AccountingIntegration {
     @Autowired
     private EurekaClient ec;
 
+    @Autowired
+    private IAccountInt accountInt;
+
+    public String pay3(PaymentRequest paymentRequest) {
+        return accountInt.pay(paymentRequest);
+    }
+
+    @Retry(name = "accounting_retry")
     public String pay(PaymentRequest paymentRequest) {
-        String result = restTemplate.postForObject("http://ACCOUNTINGAPI/api/v1/payment/service/pay",
+        String result = restTemplate.postForObject("http://ACCOUNTING/api/v1/payment/service/pay",
                                                    paymentRequest,
                                                    String.class);
         return result;
@@ -31,7 +40,7 @@ public class AccountingIntegration {
     private AtomicInteger index = new AtomicInteger();
 
     public String pay2(PaymentRequest paymentRequest) {
-        Application accounting = ec.getApplication("ACCOUNTINGAPI");
+        Application accounting = ec.getApplication("ACCOUNTING");
         List<InstanceInfo> instances = accounting.getInstances();
         for (InstanceInfo instanceInfo : instances) {
             System.out.println(instanceInfo);

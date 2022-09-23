@@ -1,5 +1,6 @@
 package org.training.etiya.ms.order.rest;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,7 @@ public class OrderController {
     private OrderService orderService;
 
     @PostMapping("/place")
+    @Operation(summary = "placing an order",description = "uzun uzun açıklama",tags = "operasyon1")
     public OrderResult placeOrder(@Valid @RequestBody OrderRest orderRest) {
         if (orderRest.getCustomerName() == null) {
             throw new IllegalArgumentException("customer name null olamaz");
@@ -30,11 +32,22 @@ public class OrderController {
                                 .setOrderId(10L);
     }
     @PostMapping("/place2")
+    @Operation(summary = "placing an order 2",description = "uzun uzun açıklama",tags = "operasyon2")
     public OrderResult placeOrder2(@Valid @RequestBody OrderRest orderRest) {
         if (orderRest.getCustomerName() == null) {
             throw new IllegalArgumentException("customer name null olamaz");
         }
         String s = orderService.placeOrder2(OrderMapping.ORDER_MAPPING.toOrder(orderRest));
+        return new OrderResult().setDesc("order alındı : " + s)
+                                .setOrderId(10L);
+    }
+
+    @PostMapping("/place3")
+    public OrderResult placeOrder3(@Valid @RequestBody OrderRest orderRest) {
+        if (orderRest.getCustomerName() == null) {
+            throw new IllegalArgumentException("customer name null olamaz");
+        }
+        String s = orderService.placeOrder3(OrderMapping.ORDER_MAPPING.toOrder(orderRest));
         return new OrderResult().setDesc("order alındı : " + s)
                                 .setOrderId(10L);
     }
